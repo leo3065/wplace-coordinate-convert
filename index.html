@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wplace Coordinate Converter</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Wplace Coordinate Converter</h1>
+        <div class="coord-group">
+            <div class="input-group">
+                <label for="tx-coord">Tile X (Tl X):</label>
+                <input type="number" id="tx-coord" min="0" max="2047" placeholder="0-2047">
+                <div class="error-text" id="tx-error"></div>
+            </div>
+            <div class="input-group">
+                <label for="px-coord">Pixel X (Px X):</label>
+                <input type="number" id="px-coord" min="0" max="999" placeholder="0-999">
+                <div class="error-text" id="px-error"></div>
+            </div>
+        </div>
+        <div class="coord-group">
+            <div class="input-group">
+                <label for="ty-coord">Tile Y (Tl Y):</label>
+                <input type="number" id="ty-coord" min="0" max="2047" placeholder="0-2047">
+                <div class="error-text" id="ty-error"></div>
+            </div>
+            <div class="input-group">
+                <label for="py-coord">Pixel Y (Py Y):</label>
+                <input type="number" id="py-coord" min="0" max="999" placeholder="0-999">
+                <div class="error-text" id="py-error"></div>
+            </div>
+        </div>
+        <div class="input-group">
+            <label>Zoom Level:</label>
+            <div class="radio-group" id="zoom-level">
+                <label><input type="radio" name="zoom" value="10.61">
+                    As far out as possible while still showing the pixels</label>
+                <label><input type="radio" name="zoom" value="16.5" checked>
+                    Probably a good size for pixel arts</label>
+                <label><input type="radio" name="zoom" value="21.5">
+                    Just this pixel in particular</label>
+            </div>
+        </div>
+        <div class="input-group" style="display: none;">
+            <label for="centered">Centered at Cell:</label>
+            <input type="checkbox" id="centered" checked>
+        </div>
+        <button id="generate-btn">Generate URL</button>
+        <div id="output-container" class="output-group" style="display: none;">
+            <label for="output-url">Generated URL:</label>
+            <a href="#" id="output-url" target="_blank"></a>
+            <div class="copy-container">
+                <button id="copy-btn">Copy</button>
+                <span class="tooltip" id="copy-tooltip">Copied!</span>
+            </div>
+        </div>
+    </div>
+    <script src="js/coordinate_convert.js"></script>
+</body>
+</html>

@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const centeredCheckbox = document.getElementById('centered');
     const generateBtn = document.getElementById('generate-btn');
+    const randomBtn = document.getElementById('random-btn');
     const outputContainer = document.getElementById('output-container');
     const outputUrlLink = document.getElementById('output-url');
     const copyBtn = document.getElementById('copy-btn');
@@ -72,6 +73,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         return isValid;
     }
+
+    randomBtn.addEventListener('click', () => {
+        for (const key in inputs) {
+            const input = inputs[key];
+            const randomValue = Math.floor(Math.random() * (input.max - input.min + 1)) + input.min;
+            input.el.value = randomValue;
+        }
+        generateBtn.click();
+    });
 
     generateBtn.addEventListener('click', () => {
         outputContainer.style.display = 'none'; // Hide output on new attempt

@@ -134,6 +134,16 @@ document.addEventListener('DOMContentLoaded', () => {
         outputUrlLink.href = url;
         outputUrlLink.textContent = url;
         outputContainer.style.display = 'flex'; // Show the output container
+
+        // Update URL with parameters
+        const params = new URLSearchParams();
+        params.set('tx', tx);
+        params.set('ty', ty);
+        params.set('px', px);
+        params.set('py', py);
+        params.set('zoom', zoom);
+        params.set('auto', 'true');
+        window.history.replaceState({}, '', `${window.location.pathname}?${params}`);
     });
 
     copyBtn.addEventListener('click', () => {
@@ -149,4 +159,35 @@ document.addEventListener('DOMContentLoaded', () => {
                 .catch(err => alert('Failed to copy URL.'));
         }
     });
+
+    function handleUrlParameters() {
+        const params = new URLSearchParams(window.location.search);
+        const urlTx = params.get('tx');
+        const urlTy = params.get('ty');
+        const urlPx = params.get('px');
+        const urlPy = params.get('py');
+        const urlZoom = params.get('zoom');
+        const autoGenerate = params.get('auto');
+
+        if (urlTx) inputs.tx.el.value = urlTx;
+        if (urlTy) inputs.ty.el.value = urlTy;
+        if (urlPx) inputs.px.el.value = urlPx;
+        if (urlPy) inputs.py.el.value = urlPy;
+
+        if (urlZoom) {
+            const zoomValue = parseFloat(urlZoom);
+            const customRadio = document.querySelector('input[value="custom"]');
+            customRadio.checked = true;
+            customZoomSlider.disabled = false;
+            customZoomSlider.value = zoomValue;
+            getZoom(); // To update the UI based on the new zoom value
+        }
+        
+        // Automatically generate if 'auto' is true and any coordinate parameter is present
+        if ((autoGenerate === 'true' || autoGenerate === '1') && (urlTx || urlTy || urlPx || urlPy)) {
+            generateBtn.click();
+        }
+    }
+
+    handleUrlParameters(); // Call the function on page load
 });

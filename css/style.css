@@ -149,3 +149,7 @@ button:hover {
     visibility: visible;
     opacity: 1;
 }
+
+#custom-zoom-slider {
+    margin-top: 0.5rem;
+}

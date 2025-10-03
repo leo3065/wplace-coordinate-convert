@@ -36,12 +36,19 @@
         <div class="input-group">
             <label>Zoom Level:</label>
             <div class="radio-group" id="zoom-level">
-                <label><input type="radio" name="zoom" value="10.61">
-                    As far out as possible while still showing the pixels</label>
+                <label><input type="radio" name="zoom" value="10.7">
+                    <span>As far out as possible while still showing the pixels</span></label>
+                <label><input type="radio" name="zoom" value="14.5" checked>
+                    <span>Probably a good size for <u>viewing</u> pixel arts</span></label>
                 <label><input type="radio" name="zoom" value="16.5" checked>
-                    Probably a good size for pixel arts</label>
+                    <span>Probably a good size for <u>drawing</u> pixel arts</span></label>
                 <label><input type="radio" name="zoom" value="21.5">
-                    Just this pixel in particular</label>
+                    <span>Just this pixel in particular</span></label>
+                <label>
+                    <input type="radio" name="zoom" value="custom">
+                    <span>Custom:</span><span id="custom-zoom-value" style="margin-left: 5px;">12.00</span>
+                </label>
+                <input type="range" id="custom-zoom-slider" min="10.7" max="22" value="12" step="0.05" style="width: 80%; margin: 0 auto;" disabled>
             </div>
         </div>
         <div class="input-group" style="display: none;">

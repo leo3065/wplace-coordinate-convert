@@ -39,6 +39,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const outputUrlLink = document.getElementById('output-url');
     const copyBtn = document.getElementById('copy-btn');
     const copyTooltip = document.getElementById('copy-tooltip');
+    const customZoomSlider = document.getElementById('custom-zoom-slider');
+    const customZoomValue = document.getElementById('custom-zoom-value');
+    const zoomRadioButtons = document.querySelectorAll('input[name="zoom"]');
+
+    function getZoom() {
+        const selectedZoom = document.querySelector('input[name="zoom"]:checked').value;
+        if (selectedZoom === 'custom') {
+            customZoomSlider.disabled = false;
+            const zoom = parseFloat(customZoomSlider.value).toFixed(2);
+            customZoomValue.textContent = zoom;
+            return zoom;
+        } else {
+            customZoomSlider.disabled = true;
+            customZoomSlider.value = selectedZoom;
+            customZoomValue.textContent = parseFloat(customZoomSlider.value).toFixed(2);
+            return parseFloat(selectedZoom);
+        }
+    }
+
+    zoomRadioButtons.forEach(radio => {
+        radio.addEventListener('change', getZoom);
+    });
+
+    customZoomSlider.addEventListener('input', () => {
+        const zoom = parseFloat(customZoomSlider.value).toFixed(2);
+        customZoomValue.textContent = zoom;
+        // Also update the associated radio button's value
+        document.querySelector('input[value="custom"]').checked = true;
+    });
 
     function validate() {
         let isValid = true;
@@ -98,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const x = tx + px / 1000;
         const y = ty + py / 1000;
 
-        const zoom = parseFloat(document.querySelector('input[name="zoom"]:checked').value, 10);
+        const zoom = getZoom();
         const centered = centeredCheckbox.checked;
 
         const url = generate_url(x, y, zoom, centered);
